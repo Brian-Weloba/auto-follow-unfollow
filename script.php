@@ -94,8 +94,8 @@ function notify($telegram_api, $chat_id, $msg)
 
 $username = $argv[1];
 $password = $argv[2];
-$tokenAPI = $argv[3];
-$chatID = $argv[4];
+// $tokenAPI = $argv[3];
+// $chatID = $argv[4];
 
 $res = checkCount($username, $password);
 $data = json_decode($res, true);
@@ -184,7 +184,7 @@ if ($data["followers"] != $data["following"]) {
 			$ms .= "✅ Follow -> <a href=\"" .  $fl["html_url"] . "\">" . $fl["login"] . "</a> " . PHP_EOL;
         }
     }
-	notify($tokenAPI, $chatID, $ms);
+	// notify($tokenAPI, $chatID, $ms);
     //file_put_contents("change.txt", $change . $message);
 } else {
     //file_put_contents("change.txt", "No changes". $message);
