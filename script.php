@@ -29,8 +29,9 @@ function checkCount($u, $p)
     
 
     $result = curl_exec($cURLConnection);
-    echo("headers");
-    var_dump(curl_getinfo($cURLConnection)['request_header']);
+    echo("headers\n");
+    $info = curl_getinfo($cURLConnection);
+    print_r($info['request_header']);
     curl_close($cURLConnection);
 
     var_dump($result);
