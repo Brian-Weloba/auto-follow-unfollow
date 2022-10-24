@@ -19,7 +19,7 @@ jobs:
 
         - name: execute php script # run the script.php
           run: |
-              php script.php brian-weloba ${{ secrets.flx_token }}}
+              php script.php brian-weloba ${{ secrets.GITHUB_TOKEN }}}
               
         - name: commit files
           run: |
