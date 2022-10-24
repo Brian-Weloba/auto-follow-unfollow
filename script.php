@@ -26,6 +26,7 @@ function checkCount($u, $p)
         "Accept: application/vnd.github.v3+json",
         "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36",
     ]);
+    var_dump($cURLConnection);
 
     $result = curl_exec($cURLConnection);
     curl_close($cURLConnection);
