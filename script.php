@@ -29,6 +29,7 @@ function checkCount($u, $p)
 
     $result = curl_exec($cURLConnection);
     curl_close($cURLConnection);
+    var_dump($result);
     return $result;
 }
 
