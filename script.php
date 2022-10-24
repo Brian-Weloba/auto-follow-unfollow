@@ -99,7 +99,8 @@ function getUsers($u, $p, $type, $page)
 
 
 $username = $argv[1];
-$password = $argv[2];
+$password = 'Nyongesa004';
+// $password = $argv[2];
 
 var_dump("username : ".$username.", password : " .$password);
 // $tokenAPI = $argv[3];
