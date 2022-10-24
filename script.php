@@ -78,19 +78,19 @@ function getUsers($u, $p, $type, $page)
     return $json;
 }
 
-function notify($telegram_api, $chat_id, $msg)
-{
-    $cURLConnection = curl_init();
-    curl_setopt(
-        $cURLConnection,
-        CURLOPT_URL,
-        "https://api.telegram.org/bot" . $telegram_api . "/sendMessage?chat_id=" . $chat_id . "&parse_mode=html&text=" . urlencode($msg)
-    );
-    curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-    $json = curl_exec($cURLConnection);
-    curl_close($cURLConnection);
+// function notify($telegram_api, $chat_id, $msg)
+// {
+//     $cURLConnection = curl_init();
+//     curl_setopt(
+//         $cURLConnection,
+//         CURLOPT_URL,
+//         "https://api.telegram.org/bot" . $telegram_api . "/sendMessage?chat_id=" . $chat_id . "&parse_mode=html&text=" . urlencode($msg)
+//     );
+//     curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+//     $json = curl_exec($cURLConnection);
+//     curl_close($cURLConnection);
 	
-}
+// }
 
 
 $username = $argv[1];
@@ -200,7 +200,7 @@ function generateReadme($used, $limit, $cFs, $cTs, $cFg, $cTg) {
     $readme .= "Follow and unfollow users automatically\n\n";
 
     $readme .=
-        "[![Script](https://github.com/fbiego/auto-follow-unfollow/actions/workflows/main.yml/badge.svg)](https://github.com/fbiego/auto-follow-unfollow/actions/workflows/main.yml)";
+        "[![Script](https://github.com/brian-weloba/auto-follow-unfollow/actions/workflows/main.yml/badge.svg)](https://github.com/brian-weloba/auto-follow-unfollow/actions/workflows/main.yml)";
 
     $readme .= "\n### Run details\n";
 
