@@ -31,7 +31,7 @@ function checkCount($u, $p)
     $result = curl_exec($cURLConnection);
     echo("headers\n");
     $info = curl_getinfo($cURLConnection);
-    print_r($info['request_header']);
+    print_r($info);
     curl_close($cURLConnection);
 
     var_dump($result);
