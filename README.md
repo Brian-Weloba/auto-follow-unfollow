@@ -1,9 +1,9 @@
 # auto-follow-unfollow
 Follow and unfollow users automatically
 
-[![Script](https://github.com/fbiego/auto-follow-unfollow/actions/workflows/main.yml/badge.svg)](https://github.com/fbiego/auto-follow-unfollow/actions/workflows/main.yml)
+[![Script](https://github.com/brian-weloba/auto-follow-unfollow/actions/workflows/main.yml/badge.svg)](https://github.com/brian-weloba/auto-follow-unfollow/actions/workflows/main.yml)
 ### Run details
-- Last run `Mon, 24 Oct 2022 09:03:17 +0000`
+- Last run `Mon, 24 Oct 2022 09:11:48 +0000`
 - X-RateLimit-Used: `0`
 - X-RateLimit-Limit: `5000`
 
