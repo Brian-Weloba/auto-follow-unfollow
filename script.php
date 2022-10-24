@@ -17,23 +17,45 @@ function getHeaders($curl, $header_line)
 
 function checkCount($u, $p)
 {
-    $cURLConnection = curl_init();
-    curl_setopt($cURLConnection, CURLOPT_URL, "https://api.github.com/user");
-    curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-    // curl_setopt($cURLConnection, CURLOPT_USERPWD, $u . ":" . $p);
-    curl_setopt($cURLConnection, CURLOPT_HEADERFUNCTION, "getHeaders");
-    curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, [
-        "Accept: application/vnd.github.v3+json",
-        "Authorization: Bearer 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",
-        "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36",
-    ]);
-    
+    // $cURLConnection = curl_init();
+    // curl_setopt($cURLConnection, CURLOPT_URL, "https://api.github.com/user");
+    // // curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+    // // curl_setopt($cURLConnection, CURLOPT_USERPWD, $u . ":" . $p);
+    // // curl_setopt($cURLConnection, CURLOPT_HEADERFUNCTION, "getHeaders");
+    // curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, [
+    //     "Accept: application/vnd.github.v3+json",
+    //     "Authorization: Bearer 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",
+    //     "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36",
+    // ]);
 
-    $result = curl_exec($cURLConnection);
-    echo("headers\n");
-    $info = curl_getinfo($cURLConnection);
-    print_r($info);
-    curl_close($cURLConnection);
+
+    // $result = curl_exec($cURLConnection);
+    // echo("headers\n");
+    // $info = curl_getinfo($cURLConnection);
+    // print_r($info);
+    // curl_close($cURLConnection);
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.github.com/user',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Accept: application/vnd.github.v3+json',
+            'User-Agent:  Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36',
+            'Authorization: Bearer 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'
+        ),
+    ));
+
+    $result = curl_exec($curl);
+
+    curl_close($curl);
 
     var_dump($result);
     return $result;
@@ -53,7 +75,7 @@ function doAction($u, $p, $action, $user)
     curl_setopt($cURLConnection, CURLOPT_HEADERFUNCTION, "getHeaders");
     curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, [
         "Accept: application/vnd.github.v3+json",
-        "authorization: Bearer ".$p,
+        "authorization: Bearer " . $p,
         "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36",
     ]);
     $result = curl_exec($cURLConnection);
@@ -96,7 +118,7 @@ function getUsers($u, $p, $type, $page)
 //     curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
 //     $json = curl_exec($cURLConnection);
 //     curl_close($cURLConnection);
-	
+
 // }
 
 
@@ -104,7 +126,7 @@ $username = $argv[1];
 // $password = 'Nyongesa004';
 $password = $argv[2];
 
-var_dump("username : ".$username.", password : " .$password);
+var_dump("username : " . $username . ", password : " . $password);
 // $tokenAPI = $argv[3];
 // $chatID = $argv[4];
 
@@ -169,9 +191,9 @@ if ($data["followers"] != $data["following"]) {
     foreach ($followers as $fl) {
         $Followers[$fl["login"]] = $fl["html_url"];
     }
-	
-	$changes = false;
-	$ms = "<b>New change</b>" . PHP_EOL  . PHP_EOL;
+
+    $changes = false;
+    $ms = "<b>New change</b>" . PHP_EOL  . PHP_EOL;
 
     foreach ($following as $fl) {
         $Following[$fl["login"]] = $fl["html_url"];
@@ -180,22 +202,22 @@ if ($data["followers"] != $data["following"]) {
             doAction($username, $password, "DELETE", $fl["login"]);
             $change = $change . "Unfollow " . $fl["login"] . PHP_EOL;
             $cFs = $cFs - 1;
-			$changes = true;
-			$ms .= "⛔ Unfollow -> <a href=\"" .  $fl["html_url"] . "\">" . $fl["login"] . "</a> " . PHP_EOL;
+            $changes = true;
+            $ms .= "⛔ Unfollow -> <a href=\"" .  $fl["html_url"] . "\">" . $fl["login"] . "</a> " . PHP_EOL;
         }
     }
-	$ms .=  PHP_EOL;
+    $ms .=  PHP_EOL;
     foreach ($followers as $fl) {
         if (!array_key_exists($fl["login"], $Following)) {
             $dif1[$fl["login"]] = $fl["html_url"];
             doAction($username, $password, "PUT", $fl["login"]);
             $change = $change . "Follow " . $fl["login"] . PHP_EOL;
             $cFg = $cFg + 1;
-			$changes = true;
-			$ms .= "✅ Follow -> <a href=\"" .  $fl["html_url"] . "\">" . $fl["login"] . "</a> " . PHP_EOL;
+            $changes = true;
+            $ms .= "✅ Follow -> <a href=\"" .  $fl["html_url"] . "\">" . $fl["login"] . "</a> " . PHP_EOL;
         }
     }
-	// notify($tokenAPI, $chatID, $ms);
+    // notify($tokenAPI, $chatID, $ms);
     //file_put_contents("change.txt", $change . $message);
 } else {
     //file_put_contents("change.txt", "No changes". $message);
@@ -205,7 +227,8 @@ if ($data["followers"] != $data["following"]) {
 
 date_default_timezone_set("UTC");
 
-function generateReadme($used, $limit, $cFs, $cTs, $cFg, $cTg) {
+function generateReadme($used, $limit, $cFs, $cTs, $cFg, $cTg)
+{
     $readme = "# auto-follow-unfollow\n";
     $readme .= "Follow and unfollow users automatically\n\n";
 
@@ -220,12 +243,10 @@ function generateReadme($used, $limit, $cFs, $cTs, $cFg, $cTg) {
 
     $readme .= "|  | Followers | Following |\n";
     $readme .= "| - | --------- | --------- |\n";
-    $readme .= "| Current | " . ($cFs + $cTs). " | " . ($cFg + $cTg) . " |\n";
+    $readme .= "| Current | " . ($cFs + $cTs) . " | " . ($cFg + $cTg) . " |\n";
     $readme .= "| Change | " . $cFs . " | " . $cFg . "|\n";
 
     return $readme;
 }
 
 file_put_contents("README.md", generateReadme($used, $limit, $cFs, $cTs, $cFg, $cTg));
-
-?>
