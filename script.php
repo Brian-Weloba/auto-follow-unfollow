@@ -24,7 +24,7 @@ function checkCount($u, $p)
     curl_setopt($cURLConnection, CURLOPT_HEADERFUNCTION, "getHeaders");
     curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, [
         "Accept: application/vnd.github.v3+json",
-        "Authorization: Bearer ".$p,
+        "Authorization: Bearer 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",
         "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36",
     ]);
     
