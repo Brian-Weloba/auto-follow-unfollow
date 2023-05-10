@@ -3,7 +3,7 @@ Follow and unfollow users automatically
 
 [![Script](https://github.com/brian-weloba/auto-follow-unfollow/actions/workflows/main.yml/badge.svg)](https://github.com/brian-weloba/auto-follow-unfollow/actions/workflows/main.yml)
 ### Run details
-- Last run `Wed, 10 May 2023 03:47:39 +0000`
+- Last run `Wed, 10 May 2023 04:08:37 +0000`
 - X-RateLimit-Used: `0`
 - X-RateLimit-Limit: `5000`
 
